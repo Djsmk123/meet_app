@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "436637524877",
+    "project_id": "meetwithfellowmate",
+    "storage_bucket": "meetwithfellowmate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436637524877:android:4ab61849bbb8337a1d53c4",
+        "android_client_info": {
+          "package_name": "com.bugbaster.meet_app.meet_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436637524877-puappumv4856kll7a043boohd5ip82mb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwXYxrgmDMgUpzF6vesMEPssHSKpG6t_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436637524877-puappumv4856kll7a043boohd5ip82mb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
