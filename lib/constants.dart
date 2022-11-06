@@ -2,9 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:meet_app/models/user_model_new.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'Models/users_models.dart';
+import 'Models/users-models.dart';
+import 'models/orgModel.dart';
 var role = "";
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -27,10 +29,12 @@ const appName="MeetWithFellowMate";
 void showToast({String msg="Something went wrong"}){
   Fluttertoast.showToast(msg: msg);
 }
-class LoggedInUserModel{
-  static late UserModel userModel;
-}Future<void> launchUrlAsync(url) async {
+
+UserModel? userModel;
+
+Future<void> launchUrlAsync(url) async {
   if (!await launchUrl(url)) {
     throw 'Could not launch $url';
   }
 }
+late OrgModel orgModel;

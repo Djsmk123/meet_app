@@ -4,7 +4,7 @@ class TextData extends StatelessWidget {
 
   final String text1;
   final String text2;
-  TextData({required this.text1,required this.text2,});
+  const TextData({super.key, required this.text1,required this.text2,});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meet_app/Models/users_models.dart';
+
 import 'package:meet_app/screens/profile-screen/text_dat.dart';
 
 import '../../constants.dart';
 import '../../gen/assets.gen.dart';
+import '../../models/user_model_new.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -90,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 15,),
             if(userModel.profileLinks.isNotEmpty)
-            TextData(
+            const TextData(
               text1: "Profile Links",
               text2: "",
             ),
@@ -104,8 +105,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Row(
                   children: [
                     Flexible(child: ListTile(
-                      onTap: (){
-                        launchUrlAsync(userModel.profileLinks[index].url);
+                      onTap: () async {
+                        await launchUrlAsync(Uri.parse(userModel.profileLinks[index].url));
                       },
                       leading: Icon(Icons.link_rounded,color: ColorsSeeds.kSecondaryColor,),
                       title: Text(userModel.profileLinks[index].label.toUpperCase(),style: const TextStyle(

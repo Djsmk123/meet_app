@@ -4,19 +4,16 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:meet_app/models/users_models.dart';
+import 'package:meet_app/components/CustomProgressIndicator.dart';
+import 'package:meet_app/models/collection.dart';
+import 'package:meet_app/screens/forms/member_form.dart';
+import 'package:meet_app/screens/forms/user_form.dart';
 import 'package:meet_app/screens/organization_screen/organization_home_screen.dart';
 import 'package:meet_app/screens/users-screens/user_home_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:meet_app/components/CustomProgressIndicator.dart';
-import 'package:meet_app/models/collection.dart';
-
-import 'package:meet_app/screens/forms/member_form.dart';
-import 'package:meet_app/screens/forms/user_form.dart';
 
 import '../../components/FadeAnimation.dart';
 import '../../components/rounded_input_field.dart';
@@ -265,6 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 }
                 case 'o':{
                   var vol=await authServices.collections.org.doc(FirebaseAuth.instance.currentUser!.uid).get();
+
                   Navigator.pop(context);
                   if(vol.exists) {
                     Navigator.push(context, MaterialPageRoute(builder: (builder)=>const OrgHomeScreen()));

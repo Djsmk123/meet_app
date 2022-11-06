@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:meet_app/Models/users_models.dart';
-import 'package:meet_app/models/collection.dart';
+import 'package:meet_app/models/user_model_new.dart';
+
 import 'package:meet_app/screens/forms/event_model.dart';
+
 import 'package:meet_app/services/user_services.dart';
 
 import '../../constants.dart';
@@ -14,7 +14,8 @@ import '../profile-screen/profile_screen.dart';
 
 class EventScreen extends StatefulWidget {
   final EventsModal models;
-  const EventScreen({Key? key, required this.models}) : super(key: key);
+  final bool isOrg;
+  const EventScreen({Key? key, required this.models, required this.isOrg}) : super(key: key);
 
   @override
   State<EventScreen> createState() => _EventScreenState();
@@ -30,10 +31,12 @@ class _EventScreenState extends State<EventScreen> {
     // TODO: implement initState
     super.initState();
     model=widget.models;
-    isRegistered=model.participants!.contains(Participants.fromJson({
+    if(!widget.isOrg) {
+      isRegistered=model.participants!.contains(Participants.fromJson({
       'isGoing':true,
       'user_id':FirebaseAuth.instance.currentUser!.uid
     }));
+    }
     for(var i in model.participants!)
       {if(i.isGoing! && i.userId!=FirebaseAuth.instance.currentUser!.uid) {
           participantsIds.add(i.userId!);
@@ -118,7 +121,7 @@ class _EventScreenState extends State<EventScreen> {
                       fontWeight: FontWeight.bold
                     ),),
                   ),
-                  if(!isRegistered)
+                  if(!isRegistered && !widget.isOrg)
                     Flexible(
 
                        child: ListTile(
@@ -158,6 +161,7 @@ class _EventScreenState extends State<EventScreen> {
                   fontWeight: FontWeight.bold
               ),),
             ),
+            if(!widget.isOrg)
             const Padding(
               padding:  EdgeInsets.all(10),
               child: Text("Recommendations for you ",style: TextStyle(
@@ -166,6 +170,7 @@ class _EventScreenState extends State<EventScreen> {
                   fontWeight: FontWeight.bold
               ),),
             ),
+            if(!widget.isOrg)
             FutureBuilder(
               builder: (context,snapshot){
                 if(snapshot.hasError)
@@ -177,7 +182,7 @@ class _EventScreenState extends State<EventScreen> {
                   dynamic model=snapshot.data! as List<UserModel>;
                   return UserListWidget(model: model,);
                 }
-                return Card();
+                return const Card();
               },
               future:UserServices.getAllRecommendations(FirebaseAuth.instance.currentUser!.uid,model.id),
             ),
@@ -196,7 +201,7 @@ class _EventScreenState extends State<EventScreen> {
                     dynamic model=snapshot.data! as List<UserModel>;
                     return UserListWidget(model: model,);
                   }
-                return Card();
+                return const Card();
               },
               future:UserServices.getAllParticipantsProfile(participantsIds),
             ),

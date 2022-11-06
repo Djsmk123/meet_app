@@ -1,10 +1,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meet_app/Models/users_models.dart';
+import 'package:meet_app/Models/users-models.dart';
 import 'package:meet_app/models/collection.dart';
-import 'package:http/http.dart' as http;
+import 'package:meet_app/models/user_model_new.dart';
 import 'package:meet_app/screens/forms/event_model.dart';
 import 'package:meet_app/services/networking.dart';
 class UserServices{
@@ -24,6 +23,17 @@ class UserServices{
       }
     return events;
   }
+  static Future<List<EventsModal>> getAllEventOrg(List eventIds) async{
+    List<EventsModal> events=[];
+    for(var i in eventIds)
+      {
+        var doc=await Collections().eventData.doc(i).get();
+        Map<String,dynamic> tmp=doc.data()!;
+        tmp['id']=doc.id;
+        events.add(EventsModal.fromJson(tmp));
+      }
+    return events;
+  }
   static  getAllRecommendations(uid,eventId)async{
    try{
      var res=await Networking.postRequest(endpoint: '/getRecommandation', body: {
@@ -36,9 +46,6 @@ class UserServices{
      log(e.toString());
      return Future.error("Something went wrong");
    }
-
-  }
-  static getReco()async {
 
   }
   static getAllParticipantsProfile(List<dynamic> usersId)async{

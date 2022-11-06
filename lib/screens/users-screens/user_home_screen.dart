@@ -1,14 +1,12 @@
 import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:intl/intl.dart';
-import 'package:meet_app/Models/users_models.dart';
 import 'package:meet_app/constants.dart';
-
+import 'package:meet_app/models/user_model_new.dart';
 import 'package:meet_app/services/user_services.dart';
 
 import '../../components/custom_drawer.dart';
@@ -34,61 +32,21 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   initAsync()async {
     try{
       var doc=await UserServices.getUserProfileData(FirebaseAuth.instance.currentUser!.uid);
-      LoggedInUserModel.userModel=UserModel.fromJson(doc);
+      userModel=UserModel.fromJson(doc);
       topEvents=await UserServices.getAllEvents();
-    }catch(e){
-      log(e.toString());
-    }
-    finally{
       setState(() {
         isLoading=false;
       });
+    }catch(e){
+      log(e.toString());
     }
+
   }
   @override
   Widget build(BuildContext context) {
-   /* List<EventsModal> topEvents=[
-      EventsModal.fromJson({
-        "desc":"Android Study Jams are community-organized study groups for people to learn how to build Android apps in the Kotlin programming language, using the curriculum provided by Google. This program is for people who are new to Android development and want to learn the best practices for how to build Android apps in Kotlin. There are two different tracks based on whether someone has prior programming experience or not. As always, you have the flexibility to adapt the level, format, duration, and other aspects of the agenda based on the needs of your community. The prerequisites are basic computer skills and basic math skills. You will be provided with access to a computer. You should bring a physical Android device and USB cable (to connect to the computer).",
-        "img":"https://files.speakerdeck.com/presentations/31cbc7b5a7274158b97d4c231651f986/slide_0.jpg",
-        "name":"Android Study Jams",
-        "orgId":"CJ9BYD3XwxRw2VMbN4CbyyZPTRk1",
-        'id':"92x0123op",
-        "participants":[
-          {
-            "isGoing":true,
-            'user_id':"180t44HgG7TKg4OCHUVIOtiaCxE3"
-          }
-        ],
-        'ts':Timestamp.now(),
-        "orgName":"Flutter New Delhi",
-        'venue':"IGDTUW,New Delhi"
-      }),
-      EventsModal.fromJson({
-        "desc":"Feeling social?   You can join us via Spatial Chat, and view the talks from there (and network with other attendees), or you can go direct to the links below!   The space is open from 9am to 6pm GMT.  Click here to enter the space.",
-        "img":"https://static.wixstatic.com/media/1b14cf_2f5987c8e01a446fb9701ae352df1b67~mv2.png/v1/crop/x_259,y_0,w_482,h_635/fill/w_544,h_716,al_c,lg_1,q_90,enc_auto/Dashatars.png",
-        "name":"Flutter Festivals",
-        "orgId":"CJ9BYD3XwxRw2VMbN4CbyyZPTRk1",
-        'id':"92x0123op",
-        "participants":[
-          {
-            "isGoing":true,
-            'user_id':"180t44HgG7TKg4OCHUVIOtiaCxE3"
-          },
-          {
-            "isGoing":true,
-            'user_id':"tvr5oC297tYeZWWbuvOPfgDgjOn1"
-          }
-        ],
-        'ts':Timestamp.now(),
-        "orgName":"Flutter New Delhi",
-        'venue':"IGDTUW,New Delhi"
-      }),
-
-    ];*/
     return Scaffold(
-      endDrawer:  !isLoading?EndDrawer(userModel: LoggedInUserModel.userModel):null,
-      body: isLoading?Center(
+      endDrawer:  !isLoading && userModel!=null?const EndDrawer():null,
+      body: isLoading && userModel==null?Center(
      child:CircularProgressIndicator(
        color: ColorsSeeds.kPrimaryColor,
      )
@@ -104,13 +62,13 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image:NetworkImage(
-                    LoggedInUserModel.userModel.img!,
+                    userModel!.img!,
                   ),
                 )
               ),
 
             ),
-            title: Text(LoggedInUserModel.userModel.name,style: const TextStyle(
+            title: Text(userModel!.name,style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w500
@@ -149,7 +107,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       itemBuilder:
                           (BuildContext context, int index, int realIndex) {
                         var offer = topEvents[index];
-                        return EventCard(offer: offer);
+                        return EventCard(offer: offer,isOrg:false,);
                       },
                       itemCount:topEvents.length,
                       options: CarouselOptions(
@@ -176,7 +134,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       itemBuilder:
                           (BuildContext context, int index, int realIndex) {
                         var offer = topEvents[index];
-                        return EventCard(offer: offer);
+                        return EventCard(offer: offer,isOrg:false,);
                       },
                       itemCount:topEvents.length,
                       options: CarouselOptions(
@@ -199,7 +157,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
 }
 class EventCard extends StatelessWidget {
   final EventsModal offer;
-  const EventCard({Key? key, required this.offer}) : super(key: key);
+  final bool isOrg;
+  const EventCard({Key? key, required this.offer, required this.isOrg}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +168,7 @@ class EventCard extends StatelessWidget {
       child: Bounce(
         duration:const Duration(milliseconds: 200),
         onPressed: (){
-          Navigator.push(context,MaterialPageRoute(builder: (builder)=>EventScreen(models: offer,)));
+          Navigator.push(context,MaterialPageRoute(builder: (builder)=>EventScreen(models: offer,isOrg: isOrg,)));
         },
         child: Container(
           padding: const EdgeInsets.all(10),

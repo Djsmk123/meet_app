@@ -1,23 +1,22 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:meet_app/constants.dart';
+import 'package:meet_app/models/user_model_new.dart';
 import 'package:meet_app/screens/authentication/welcome_screen.dart';
 
-import '../Models/users_models.dart';
+
 import '../gen/assets.gen.dart';
 import '../screens/profile-screen/profile_screen.dart';
 import '../services/logins_signup_services.dart';
 
 class EndDrawer extends StatelessWidget {
-  final UserModel userModel;
+
   const EndDrawer({
-    Key? key, required this.userModel,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -33,7 +32,7 @@ class EndDrawer extends StatelessWidget {
             CircleAvatar(
               maxRadius: 80,
               backgroundColor: ColorsSeeds.kPrimaryColor,
-              backgroundImage:(userModel.img!=null)?NetworkImage(userModel.img!):Assets.images.appLogo.provider()
+              backgroundImage:(userModel!.img!=null)?NetworkImage(userModel!.img!):Assets.images.appLogo.provider()
             ),
             const SizedBox(
               height: 10,
@@ -43,7 +42,7 @@ class EndDrawer extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    userModel.name,
+                    userModel!.name,
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 30,
@@ -85,7 +84,7 @@ class EndDrawer extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (builder) => ProfileScreen(userModel: userModel,)));
+                            builder: (builder) => ProfileScreen(userModel: userModel!,)));
                   }
                 }),
             /*drawerRowWidget(

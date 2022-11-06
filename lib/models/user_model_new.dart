@@ -1,25 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meet_app/Models/users_models.dart';
-class VolModel {
-  Map info = {
-    'name': "",
-    'phno': 0,
-    'title': "",
-    'address': "",
-    "comments": "",
-    'em': ""
-  };
-}
-
-class MemberModel {
-  Map info = {
-    'name': "",
-    'phno': 0,
-    'title': "",
-    "comments": "",
-    'em': ""
-  };
-}
 
 class UserModel {
   UserModel({
@@ -115,4 +94,3 @@ class RegisterEventModel{
     return data;
   }
 }
-

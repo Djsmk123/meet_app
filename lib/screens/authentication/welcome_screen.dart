@@ -1,5 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -77,7 +79,7 @@ class _BodyState extends State<Body> {
     try{
       var doc=await service.collections.userType.doc(auth.currentUser!.uid).get();
       role=doc.get('role');
-      print(role);
+      log(role);
       await Future.delayed(const Duration(seconds: 1));
       switch(role)
       {

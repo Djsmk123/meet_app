@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../components/CustomProgressIndicator.dart';
 import '../../components/custom_text_input.dart';
-import '../../models/users_models.dart';
+import '../../models/users-models.dart';
 import '../../providers/form_error.dart';
 import '../../services/logins_signup_services.dart';
 
