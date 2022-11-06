@@ -8,6 +8,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:meet_app/models/users_models.dart';
 import 'package:meet_app/screens/organization_screen/organization_home_screen.dart';
 import 'package:meet_app/screens/users-screens/user_home_screen.dart';
 import 'package:provider/provider.dart';

@@ -49,8 +49,10 @@ dependencies:
   firebase_auth: ^4.1.0
   carousel_slider: ^4.1.1
   cloud_firestore: ^4.0.3
+  url_launcher:
   toggle_switch:
   http: ^0.13.5
+  intl:
 dev_dependencies:
   flutter_test:
     sdk: flutter

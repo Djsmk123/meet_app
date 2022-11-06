@@ -3,10 +3,24 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+
+/// Default [FirebaseOptions] for use with your Firebase apps.
+///
+/// Example:
+/// ```dart
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
+/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -35,31 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA6MsaFR2_HMpK3vwWRygnRJOXQFfiaCls',
-    appId: '1:174701045341:web:63edb0cc23c1f5d32acfb4',
-    messagingSenderId: '174701045341',
-    projectId: 'attendacetracker-98c35',
-    authDomain: 'attendacetracker-98c35.firebaseapp.com',
-    storageBucket: 'attendacetracker-98c35.appspot.com',
-    measurementId: 'G-SXBZ6DHKNW',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCI9yjteK5_dHBDP3erji40h9NdAEYo6aE',
-    appId: '1:174701045341:android:a6ea904d77d479c22acfb4',
-    messagingSenderId: '174701045341',
-    projectId: 'attendacetracker-98c35',
-    storageBucket: 'attendacetracker-98c35.appspot.com',
+    apiKey: 'AIzaSyAwXYxrgmDMgUpzF6vesMEPssHSKpG6t_0',
+    appId: '1:436637524877:android:4ab61849bbb8337a1d53c4',
+    messagingSenderId: '436637524877',
+    projectId: 'meetwithfellowmate',
+    storageBucket: 'meetwithfellowmate.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDbzFe32Qi_OSTGAEvyfB5PTVArdbZG4Ww',
-    appId: '1:174701045341:ios:86b47446ad5484c72acfb4',
-    messagingSenderId: '174701045341',
-    projectId: 'attendacetracker-98c35',
-    storageBucket: 'attendacetracker-98c35.appspot.com',
-    iosClientId: '174701045341-6ilat49469s4p8rs31vka22sv9tmbgk6.apps.googleusercontent.com',
-    iosBundleId: 'com.flutterblaster.upasthit.upasthit',
+    apiKey: 'AIzaSyCewyef2TGOz3h7iU8Dj5j5W9FrAb_KylQ',
+    appId: '1:436637524877:ios:c324aad5c9bf458d1d53c4',
+    messagingSenderId: '436637524877',
+    projectId: 'meetwithfellowmate',
+    storageBucket: 'meetwithfellowmate.appspot.com',
+    iosClientId: '436637524877-qj0a8lmvv6ejbk2534upkldr1ipfdudb.apps.googleusercontent.com',
+    iosBundleId: 'com.bugbaster.meetapp.meetApp',
   );
 }

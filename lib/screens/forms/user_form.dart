@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
-
-import '../../Models/users_models.dart';
 import '../../components/CustomProgressIndicator.dart';
 import '../../components/custom_text_input.dart';
+import '../../models/users_models.dart';
 import '../../providers/form_error.dart';
 import '../../services/logins_signup_services.dart';
 

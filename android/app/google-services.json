@@ -29,6 +29,13 @@
             {
               "client_id": "436637524877-puappumv4856kll7a043boohd5ip82mb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "436637524877-qj0a8lmvv6ejbk2534upkldr1ipfdudb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bugbaster.meetapp.meetApp"
+              }
             }
           ]
         }

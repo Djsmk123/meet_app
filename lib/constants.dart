@@ -1,12 +1,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'Models/users_models.dart';
 var role = "";
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
     importance: Importance.max,
-    playSound: true);
+    playSound: true
+);
 
 
 class ColorsSeeds{
@@ -19,3 +24,13 @@ class ColorsSeeds{
 
 const tagline="Connect\nwith\nFellowMate!";
 const appName="MeetWithFellowMate";
+void showToast({String msg="Something went wrong"}){
+  Fluttertoast.showToast(msg: msg);
+}
+class LoggedInUserModel{
+  static late UserModel userModel;
+}Future<void> launchUrlAsync(url) async {
+  if (!await launchUrl(url)) {
+    throw 'Could not launch $url';
+  }
+}

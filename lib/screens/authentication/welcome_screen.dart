@@ -9,7 +9,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meet_app/constants.dart';
 import 'package:meet_app/gen/assets.gen.dart';
 import 'package:meet_app/screens/authentication/signup_screen.dart';
-
 import 'package:meet_app/screens/forms/member_form.dart';
 import 'package:meet_app/screens/forms/user_form.dart';
 import 'package:meet_app/screens/organization_screen/organization_home_screen.dart';
@@ -78,14 +77,16 @@ class _BodyState extends State<Body> {
     try{
       var doc=await service.collections.userType.doc(auth.currentUser!.uid).get();
       role=doc.get('role');
+      print(role);
       await Future.delayed(const Duration(seconds: 1));
       switch(role)
       {
        case 'u': {
-
+         ///await service.collections.userData.doc(auth.currentUser!.uid).set(userdata);
          var vol=await service.collections.userData.doc(auth.currentUser!.uid).get();
          Navigator.pop(context);
          if(vol.exists) {
+
            Navigator.push(context, MaterialPageRoute(builder: (builder)=>const UserHomeScreen()));
          }
          else{

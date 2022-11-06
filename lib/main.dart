@@ -45,3 +45,33 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
     PointerDeviceKind.mouse,
   };
 }
+Map<String,dynamic> userdata= { "name": "SmkWinner",
+  "skills": [
+    "C++",
+    "Java",
+    "Flutter",
+    "Dart",
+    "Firebase"
+  ],
+  "age": 21,
+  "job_title": "Flutter Developer at xyz",
+  "bio": "Experienced Flutter Developer adept in all stages of advanced Flutter development. "
+      "Knowledgeable in user interface, testing, and debugging processes. Able to "
+      "effectively self-manage during independent projects, as well as collaborate in a "
+      "team setting.",
+  "img": "https://github.com/djsmk123",
+  "email": "djsmk123@gmail.com",
+  "phone_number": "+91987654321",
+  "profile_links": [
+    {
+      "label": "github",
+      "url": "https://github.com/djsmk123",
+      "is_visible": true,
+    },
+    {
+      "label": "twitter",
+      "url": "https://twitter.com/smk_winner",
+      "is_visible": true
+    }
+  ]
+};

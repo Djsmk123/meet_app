@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Collections {
-  final org = FirebaseFirestore.instance.collection('organization');
+  final org = FirebaseFirestore.instance.collection('organisation');
   final userData = FirebaseFirestore.instance.collection('users_data');
   final eventData = FirebaseFirestore.instance.collection('events');
 
